@@ -1,0 +1,554 @@
+/* ==================================================
+   KUMYALI COFFEE LINE — Menü Sitesi
+   Tema: Denizin serinliği + kahvenin sıcaklığı
+   ================================================== */
+
+:root {
+  --espresso: #17110c;
+  --espresso-2: #221913;
+  --brown: #5c3a24;
+  --copper: #c98a4b;
+  --copper-deep: #b9762f;
+  --copper-light: #dda765;
+  --gold: #e7c79b;
+
+  --sea-deep: #163f42;
+  --sea: #276b6c;
+  --sea-mid: #3d8f88;
+  --sea-light: #8fc2ba;
+  --foam: #dff0ec;
+
+  --cream: #f4ead7;
+  --cream-2: #e7d8bd;
+  --paper: #fffaf3;
+  --text: #33251a;
+  --text-light: #7a6650;
+  --shadow: rgba(23, 17, 12, 0.14);
+
+  --font-title: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Poppins", "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--cream);
+  color: var(--text);
+  line-height: 1.55;
+  overflow-x: hidden;
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ==================== TOP BAR ==================== */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  padding: 0.9rem 1.6rem;
+  transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+.topbar.scrolled {
+  background: rgba(23, 17, 12, 0.94);
+  backdrop-filter: blur(8px);
+  padding: 0.6rem 1.6rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+.topbar-brand { display: flex; flex-direction: column; line-height: 1; }
+.topbar-mark {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--cream);
+  letter-spacing: 0.04em;
+}
+.topbar-sub {
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--copper-light);
+  margin-top: 2px;
+}
+.topbar-nav { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.topbar-nav a {
+  color: var(--cream);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.topbar-nav a:hover { background: var(--copper); color: var(--espresso); }
+
+/* ==================== HERO ==================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: var(--cream);
+}
+.hero-sea {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      #2b1c12 0%,
+      #6b3f22 22%,
+      #b56a34 40%,
+      #d98f4e 52%,
+      #4c8a86 66%,
+      #276b6c 80%,
+      #163f42 100%);
+}
+.hero-sea::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 34%, rgba(255, 200, 120, 0.28), transparent 42%),
+    radial-gradient(circle at 50% 100%, rgba(22, 63, 66, 0.55), transparent 55%);
+}
+.hero-sun {
+  position: absolute;
+  top: 24%;
+  left: 50%;
+  width: 190px;
+  height: 190px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 226, 170, 0.95), rgba(240, 170, 90, 0.35) 55%, transparent 72%);
+  filter: blur(2px);
+}
+.hero-shimmer {
+  position: absolute;
+  left: 0; right: 0;
+  top: 62%;
+  bottom: 0;
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06) 0px,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 2px,
+      transparent 9px);
+  opacity: 0.5;
+  mask-image: linear-gradient(180deg, transparent, #000 40%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: 7rem 1.5rem 6rem;
+  max-width: 720px;
+}
+.hero-logo {
+  width: clamp(200px, 62vw, 272px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 1.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 42%, #241a12, #100b07 78%);
+  border: 3px solid rgba(201, 138, 75, 0.78);
+  box-shadow:
+    0 0 0 6px rgba(15, 11, 8, 0.28),
+    0 18px 48px rgba(0, 0, 0, 0.55),
+    0 0 46px rgba(201, 138, 75, 0.30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 4vw, 20px);
+}
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(1.1) contrast(1.06) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+}
+.hero-eyebrow {
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+.hero-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 1.05;
+  text-shadow: 0 4px 26px rgba(0, 0, 0, 0.4);
+}
+.hero-tagline {
+  margin: 1.2rem auto 2rem;
+  max-width: 460px;
+  font-weight: 300;
+  font-size: 1.05rem;
+  color: rgba(246, 237, 224, 0.92);
+}
+.hero-btn {
+  display: inline-block;
+  background: var(--copper);
+  color: var(--espresso);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.85rem 2.3rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(201, 138, 75, 0.4);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.hero-btn:hover { background: var(--copper-light); transform: translateY(-2px); }
+
+.hero-wave {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  width: 100%;
+  height: 90px;
+  z-index: 2;
+}
+
+/* ==================== MENÜ ==================== */
+.menu-awning {
+  height: 34px;
+  background: var(--copper);
+  -webkit-mask: radial-gradient(circle 17px at 17px 34px, #0000 0 16px, #000 16.5px) repeat-x;
+          mask: radial-gradient(circle 17px at 17px 34px, #0000 0 16px, #000 16.5px) repeat-x;
+  -webkit-mask-size: 34px 34px;
+          mask-size: 34px 34px;
+}
+
+#menu {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(185, 118, 47, 0.05) 1px, transparent 1.5px),
+    radial-gradient(circle at 65% 55%, rgba(185, 118, 47, 0.05) 1px, transparent 1.5px),
+    radial-gradient(circle at 85% 80%, rgba(185, 118, 47, 0.04) 1px, transparent 1.5px),
+    var(--cream);
+  background-size: 26px 26px, 34px 34px, 22px 22px;
+}
+
+.menu-inner { max-width: 1100px; margin: 0 auto; padding: 2.5rem 1.25rem 1rem; }
+
+.menu-heading { text-align: center; padding: 1.5rem 1rem 0.5rem; }
+.menu-eyebrow {
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--copper-deep);
+  margin-bottom: 0.4rem;
+}
+.menu-heading > h2 {
+  font-family: var(--font-title);
+  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--copper-deep);
+  line-height: 1;
+}
+
+.menu-section { margin-top: 3.5rem; scroll-margin-top: 96px; }
+
+.section-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-weight: 700;
+  text-align: center;
+  color: var(--espresso);
+  margin-bottom: 0.3rem;
+}
+.section-title::after {
+  content: "";
+  display: block;
+  width: 66px; height: 3px;
+  margin: 0.7rem auto 0;
+  border-radius: 3px;
+  background: var(--copper);
+}
+.menu-section.cool .section-title::after { background: var(--sea-mid); }
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+/* alt kategori */
+.subcat { margin-top: 2.2rem; }
+.subcat-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--copper-deep);
+  margin-bottom: 1.6rem;
+}
+.subcat-title::before,
+.subcat-title::after {
+  content: "";
+  height: 1px;
+  width: clamp(30px, 12%, 90px);
+  background: var(--cream-2);
+}
+
+/* ürün kartları (OUR DRINK MENU stili) */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 2rem 1.4rem;
+  justify-items: center;
+}
+.product {
+  width: 100%;
+  max-width: 200px;
+  text-align: center;
+}
+.product-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  background:
+    linear-gradient(160deg, #fbf4e8, #efe1c8);
+  border: 2px dashed var(--cream-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+/* zeminde yumuşak gölge (referanstaki gibi) */
+.product-photo::after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 62%;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(120, 84, 40, 0.18);
+  filter: blur(4px);
+}
+.product-photo .ph {
+  font-size: 2.2rem;
+  opacity: 0.45;
+}
+/* fotoğraf eklendiğinde: .product-photo içine <img class="product-img-fill"> koy */
+.product-img-fill {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.product-img-fill + .ph { display: none; }
+
+.price-badge {
+  position: absolute;
+  top: 40%;
+  right: -10px;
+  transform: translateY(-50%);
+  min-width: 52px;
+  height: 52px;
+  padding: 0 6px;
+  border-radius: 50%;
+  background: var(--copper-deep);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(120, 70, 20, 0.35);
+  z-index: 3;
+}
+.product-name {
+  margin-top: 0.9rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--copper-deep);
+  line-height: 1.25;
+}
+
+/* ==================== FOOTER ==================== */
+.site-footer {
+  background: linear-gradient(180deg, var(--espresso-2), var(--espresso));
+  color: var(--cream-2);
+  padding: 3.5rem 1.5rem 2rem;
+  margin-top: 4rem;
+  text-align: center;
+  scroll-margin-top: 96px;
+}
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+}
+.footer-brand { flex: 1 1 260px; }
+.footer-mark {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--cream);
+  display: block;
+}
+.footer-sub {
+  letter-spacing: 0.25em;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--copper-light);
+}
+.footer-slogan {
+  margin-top: 0.8rem;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 0.95rem;
+}
+.footer-info { flex: 1 1 300px; text-align: left; }
+.footer-info h2 {
+  font-family: var(--font-title);
+  color: var(--cream);
+  font-size: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+.footer-address {
+  color: var(--cream-2);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  max-width: 340px;
+}
+.footer-address a { color: var(--copper-light); text-decoration: underline; text-underline-offset: 3px; }
+.footer-address a:hover { color: var(--gold); }
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.1rem;
+}
+.contact-links a {
+  border: 1px solid var(--copper);
+  color: var(--copper-light);
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.contact-links a:hover { background: var(--copper); color: var(--espresso); }
+.copyright {
+  margin-top: 2.5rem;
+  font-size: 0.76rem;
+  color: rgba(246, 237, 224, 0.45);
+}
+
+/* ==================== YUKARI ÇIK ==================== */
+.to-top {
+  position: fixed;
+  right: 1.2rem; bottom: 1.2rem;
+  z-index: 40;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--copper);
+  color: var(--espresso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: 0 6px 18px var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.2s ease;
+}
+.to-top.visible { opacity: 1; pointer-events: auto; }
+.to-top:hover { transform: translateY(-3px); }
+
+/* ==================== RESPONSIVE ==================== */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
+
+/* Telefon */
+@media (max-width: 640px) {
+  .topbar {
+    padding: 0.55rem 0.6rem;
+    justify-content: center;
+    gap: 0.35rem;
+  }
+  .topbar-brand { align-items: center; text-align: center; width: 100%; }
+  .topbar-mark { font-size: 1.25rem; }
+  /* kategori linkleri tek satırda, yatay kaydırmalı */
+  .topbar-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    max-width: 100%;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .topbar-nav::-webkit-scrollbar { display: none; }
+  .topbar-nav a {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.78rem;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .topbar.scrolled .topbar-nav a { background: rgba(255, 255, 255, 0.10); }
+
+  .hero-inner { padding: 6.5rem 1.2rem 4.5rem; }
+  .hero-title { font-size: clamp(2.1rem, 9vw, 3rem); }
+  .hero-tagline { font-size: 0.98rem; }
+
+  .menu-inner { padding: 2rem 1rem 1rem; }
+  .menu-section { scroll-margin-top: 118px; }
+  .site-footer { scroll-margin-top: 118px; }
+
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 0.9rem; }
+  .product { max-width: 100%; }
+  /* rozet taşmasın diye biraz içeride */
+  .price-badge {
+    right: 2px;
+    min-width: 46px;
+    height: 46px;
+    font-size: 0.76rem;
+  }
+  .product-name { font-size: 0.9rem; }
+
+  .footer-inner { flex-direction: column; text-align: center; }
+  .footer-info, .footer-brand { text-align: center; }
+  .footer-address { margin: 0 auto; }
+  .contact-links { justify-content: center; }
+}
+
+/* Çok dar ekran */
+@media (max-width: 360px) {
+  .product-grid { gap: 1.3rem 0.7rem; }
+  .price-badge { min-width: 42px; height: 42px; font-size: 0.72rem; }
+}
