@@ -50,7 +50,7 @@ Then open `http://localhost:8730`. There is no build/lint/test tooling — it's 
 
 Items without a photo yet just omit the `<img>` and show the `.ph` placeholder emoji instead — there's no build-time distinction, it's whatever's in the HTML.
 
-**Exception — Patates Kızartması (fries):** this is the only item with multiple sizes/prices sharing one photo. Instead of repeating the `<figure class="product">` per size, it uses `.product-grid.single-item` (flex, not grid) with one photo and a `.size-options` row of `.size-pill` spans (`Küçük Boy 100 ₺`, etc.). Follow this pattern if another multi-size item shows up — don't duplicate the photo across multiple `<figure>`s.
+**Exception — items with multiple sizes/prices sharing one photo:** instead of repeating the `<figure class="product">` per size, use `.product-grid.single-item` (flex, not grid) with one photo and a `.size-options` row of `.size-pill` spans (`Küçük Boy 100 ₺`, etc.). Used by Patates Kızartması (Küçük/Orta/Büyük Boy), Tost Çeşitleri (Sucuklu/Kaşarlı/Karışık, each 200 ₺, one shared photo), and Tost Menü (same three flavors + fries, each 300 ₺, its own photo showing the combo plate). Follow this pattern if another multi-size/multi-variant item shows up — don't duplicate the photo across multiple `<figure>`s.
 
 ## Product photo pipeline
 
@@ -72,4 +72,4 @@ File naming: lowercase kebab-case ASCII (`sikma-nar-suyu.png`, not `sıkma nar s
 
 ## Known gaps
 
-- **Vanilya (Dondurma)** has no photo — the only source supplied so far had a site-wide tiled watermark that couldn't be removed.
+None currently — all menu items have photos.
