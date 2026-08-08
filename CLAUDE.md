@@ -8,25 +8,30 @@ A single-page Turkish-language menu website for **Kumyalı Coffee Line**, a coff
 
 Live deploy: `https://kumyalicoffeeline.netlify.app` (Netlify). GitHub: `zikreddindurmuss/kumyali-coffee-line`.
 
+## Repo layout: `public/` is the deploy root, this file is not
+
+Everything that actually ships to the browser lives under **`public/`** (`index.html`, `style.css`, `logo.png`, `favicon.ico`, `apple-touch-icon.png`, `netlify.toml`, `Pictures/`). `CLAUDE.md` and `.git/` sit one level up, *outside* `public/`, on purpose — the user manually drag-and-drops a folder into Netlify's deploy UI, and this split means that folder (`public/`) never includes internal dev notes. **When telling the user what to drag/upload to Netlify, it's the `public/` folder, never the repo root.** If a new deployable file is added, it goes inside `public/`; if it's project/dev documentation, it stays at the repo root next to this file.
+
 ## Running locally
 
 There's no dev server config in this repo. To preview:
 
 ```
-python -m http.server 8730 --directory .
+python -m http.server 8730 --directory public
 ```
 
 Then open `http://localhost:8730`. There is no build/lint/test tooling — it's plain HTML/CSS, edit and reload.
 
-**Netlify is not linked to GitHub.** Deploys are manual (drag-and-drop the folder into the Netlify dashboard, or upload via Netlify's UI). A previous attempt to link the GitHub repo failed with "No repositories found" / "we couldn't access the repository" even after granting the Netlify GitHub App access — this is an unresolved GitHub App / Netlify sync issue, not a repo problem (the repo itself is public, non-empty, not archived). If revisiting this, the fix path is usually: uninstall the Netlify GitHub App entirely from `github.com/settings/installations`, then re-run the "Link repository" flow from scratch rather than just re-granting permissions.
+**Netlify is not linked to GitHub.** Deploys are manual (drag-and-drop the `public/` folder into the Netlify dashboard, or upload via Netlify's UI). A previous attempt to link the GitHub repo failed with "No repositories found" / "we couldn't access the repository" even after granting the Netlify GitHub App access — this is an unresolved GitHub App / Netlify sync issue, not a repo problem (the repo itself is public, non-empty, not archived). If revisiting this, the fix path is usually: uninstall the Netlify GitHub App entirely from `github.com/settings/installations`, then re-run the "Link repository" flow from scratch rather than just re-granting permissions. (If it ever does get linked, the Netlify site's "Base directory"/"Publish directory" build setting would need to be set to `public`.)
 
-## Files
+## Files (all under `public/`)
 
 - `index.html` — the entire site: header, hero, menu sections, footer. No templating; every menu item is hand-written HTML.
 - `style.css` — all styling, theme tokens as CSS custom properties in `:root` (`--copper`, `--sea`, `--cream`, `--espresso`, etc.), theme is "sea coolness + coffee warmth".
 - `logo.png` — brand wordmark, pre-processed to remove its original black background plate (see "Product photo pipeline" below) so it composites directly onto the hero's gradient rather than sitting in a box.
+- `favicon.ico` / `apple-touch-icon.png` — tab/home-screen icon, a cropped "C" from the brand badge logo on its dark background.
 - `Pictures/` — all menu item photos. Flat folder, no subdirectories.
-- `netlify.toml` — security headers only (CSP, X-Frame-Options, etc.), no build config.
+- `netlify.toml` — security headers only (CSP, X-Frame-Options, etc.), no build config. Must stay inside `public/` since that's the folder actually uploaded to Netlify — headers wouldn't apply if it sat outside the deploy root.
 
 ## Menu markup structure
 
@@ -62,7 +67,7 @@ All photos in `Pictures/` go through the same normalization before being committ
 4. Resize to 900×900 (`Image.LANCZOS`).
 5. Quantize to reduce file size: `img.quantize(colors=200, method=Image.FASTOCTREE)`, save with `optimize=True`. This typically takes a 300KB+ raw photo down to 30–100KB.
 
-File naming: lowercase kebab-case ASCII (`sikma-nar-suyu.png`, not `sıkma nar suyu.png`) — source files dropped into `Pictures/` by the user often have Turkish characters/spaces/mixed case and get renamed to the ASCII form during processing. Only the final processed files should be committed; raw/unprocessed source uploads should be deleted from `Pictures/` before committing (they're 5-20x larger and unused — cross-check with `grep -oE 'src="Pictures/[^"]+"' index.html` to confirm nothing referenced got deleted).
+File naming: lowercase kebab-case ASCII (`sikma-nar-suyu.png`, not `sıkma nar suyu.png`) — source files dropped into `Pictures/` by the user often have Turkish characters/spaces/mixed case and get renamed to the ASCII form during processing. Only the final processed files should be committed; raw/unprocessed source uploads should be deleted from `Pictures/` before committing (they're 5-20x larger and unused — cross-check with `grep -oE 'src="Pictures/[^"]+"' public/index.html` to confirm nothing referenced got deleted).
 
 **Watermarked source images:** users sometimes supply photos with a preview watermark (CityPNG, Shutterstock, Vecteezy, PNGTree seen so far). If the watermark is a separate element (e.g. a text strip outside the subject), `rembg` usually strips it along with the background — check the result. If the watermark is tiled *across* the actual subject (seen with Vecteezy and PNGTree), it can't be cleanly removed — the default is to not ship it and leave that menu item without a photo. This is a default, not an absolute: if the user explicitly says to use it anyway (asked and confirmed for Sıcak Ballı Süt / Sıcak Süt), ship it as-is rather than re-asking.
 
